@@ -6,21 +6,20 @@ spring.datasource.url=jdbc:postgresql://ep-frosty-firefly-a6xhee5d.us-west-2.aws
 
 spring.datasource.username=hotel_db_owner
 spring.datasource.password=D3PbW5RNFJMS
-#Indica el controlador de la base de datos en este caso postgre
+
 spring.datasource.driver-class-name=org.postgresql.Driver
 
-#Propiedades de JPA/Hibernate
-#adapta las consultas sql a la sintaxis postgre sql
+
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-#significa que hibernate actualizara la estructura de la base de datos
+
 spring.jpa.hibernate.ddl-auto=update
-#permite que se muestre las consultas en la consola
+
 spring.jpa.show-sql=true
-#permite que las consultas mostradas en la consola se formateen de manera mas legible
+
 spring.jpa.properties.hibernate.format_sql=true
-#Indica la inicializacion de la base de datos de un archivo sql en este caso la desactivamos
+
 spring.sql.init.mode=never
-#Define la ubicacion de un archivo sql que contiene datos de prueba
+
 spring.sql.init.data-locations=classpath:data-test.sql
 
 spring.mail.host=smtp.gmail.com
@@ -30,7 +29,5 @@ spring.mail.password=dldr oevl jhrr slkb
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 
-paypal.client-id=tuclientidpaypal
-paypal.client-secret=tuconstraseñapaypal
-paypal.api-base=https://api-m.sandbox.paypal.com
+
 
