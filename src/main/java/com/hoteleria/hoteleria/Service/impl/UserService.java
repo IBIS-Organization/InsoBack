@@ -109,7 +109,7 @@ public class UserService {
 
     }
     private void sendResetPasswordEmail(String email, String token) throws Exception {
-        String resetLink = "http://localhost:4200/confirmacion-contrasena?token=" + token;
+        String resetLink = "https://ibis-organization.vercel.app/confirmacion-contrasena?token=" + token;
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
