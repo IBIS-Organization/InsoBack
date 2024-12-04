@@ -1,0 +1,4 @@
+package com.hoteleria.hoteleria.integration.payment.paypal.dto;
+
+public class Paypal {
+}

@@ -1,0 +1,43 @@
+package com.hoteleria.hoteleria.Service.impl;
+import com.hoteleria.hoteleria.Exceptions.ResourceNotFoundException;
+import com.hoteleria.hoteleria.DTO.DocumentoIdentidadDTO;
+import com.hoteleria.hoteleria.Entity.ReniecResponseDTO;
+import com.hoteleria.hoteleria.Repository.DocumentoIdentidadRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class DocumentoIdentidadService {
+
+    @Autowired
+    private DocumentoIdentidadRepository documentoIdentidadRepository;
+
+    public ReniecResponseDTO guardarDocumento(DocumentoIdentidadDTO documentoDTO) {
+        // Mapeo del DTO a la entidad DocumentoIdentidad
+        ReniecResponseDTO documento = new ReniecResponseDTO();
+        documento.setTipoDocumento(documentoDTO.getTipoDocumento());
+        documento.setArchivo(documentoDTO.getArchivo());
+        documento.setValidacion(documentoDTO.isValidacion());
+
+        // Guardar la entidad en el repositorio
+        return documentoIdentidadRepository.save(documento);
+    }
+
+    public void validarDocumento(Long id) {
+        // Aquí puedes agregar lógica de validación para el documento si es necesario
+        // Ejemplo: obtener el documento por ID y verificar su validez
+        ReniecResponseDTO documento = documentoIdentidadRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Documento no encontrado"));
+        documento.setValidacion(true); // O la lógica de validación correspondiente
+        documentoIdentidadRepository.save(documento);
+    }
+
+    public ReniecResponseDTO asociarDocumentoConReserva(Long reservaId, Long documentoId) {
+        // Lógica para asociar un documento con una reserva
+        // Asume que tienes acceso a la entidad Reserva y su repositorio
+        ReniecResponseDTO documento = documentoIdentidadRepository.findById(documentoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Documento no encontrado"));
+        // Aquí debes implementar la lógica de asociación con la reserva
+        return documento;
+    }
+}

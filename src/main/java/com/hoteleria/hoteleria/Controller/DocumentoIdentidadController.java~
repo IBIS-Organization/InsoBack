@@ -1,0 +1,37 @@
+package com.hoteleria.hoteleria.Controller;
+
+import com.hoteleria.hoteleria.DTO.DocumentoIdentidadDTO;
+import com.hoteleria.hoteleria.Service.impl.DocumentoIdentidadService;
+import com.hoteleria.hoteleria.Entity.ReniecResponseDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/documento")
+public class DocumentoIdentidadController {
+
+    @Autowired
+    private DocumentoIdentidadService documentoIdentidadService;
+
+    @PostMapping("/subir")
+    public ResponseEntity<ReniecResponseDTO> subirDocumento(@RequestBody DocumentoIdentidadDTO documentoDTO) {
+        ReniecResponseDTO documento = documentoIdentidadService.guardarDocumento(documentoDTO);
+        return new ResponseEntity<>(documento, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/validar/{id}")
+    public ResponseEntity<Void> validarDocumento(@PathVariable Long id) {
+        documentoIdentidadService.validarDocumento(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/asociar/{reservaId}/{documentoId}")
+    public ResponseEntity<ReniecResponseDTO> asociarDocumentoReserva(@PathVariable Long reservaId, @PathVariable Long documentoId) {
+        ReniecResponseDTO documento = documentoIdentidadService.asociarDocumentoConReserva(reservaId, documentoId);
+        return new ResponseEntity<>(documento, HttpStatus.OK);
+    }
+}
+
+
